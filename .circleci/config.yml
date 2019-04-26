@@ -1,13 +1,12 @@
-version: 2.0
+version: 2.1
 jobs:
   build_gcc_6:
     docker:
       - image: gcc:6
     steps:
       - checkout
-      - run: mkdir -p build && cd build
-      - run: g++ -o main main.cpp -std=c++14
-      - run: ./main
+      - run: make
+      - run: ./test_bin
   build_gcc_latest:
     docker:
       - image: gcc:latest
