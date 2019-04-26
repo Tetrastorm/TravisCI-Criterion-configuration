@@ -1,0 +1,10 @@
+*.o
+*.a
+
+test_bin
+unit_tests
+
+vgcore*
+*.gc*
+
+.vscode/
