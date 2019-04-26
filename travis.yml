@@ -1,0 +1,44 @@
+language: c
+sudo: required
+
+branches:
+  only: 
+    - master
+
+matrix:
+  include:
+    - env: CLANG_VERSION=5.0 BUILD_TYPE=Debug CPP=14 ASAN=On 
+      os: linux
+      addons: &clang5
+        apt:
+          packages:
+            - util-linux
+            - clang-5.0
+            - gcc-6
+            - valgrind
+          sources:
+            - ubuntu-toolchain-r-test
+            - llvm-toolchain-trusty-5.0
+
+
+    # gcc-6 C++11/14/1z Debug/Release
+    - env: GCC_VERSION=6 BUILD_TYPE=Debug CPP=14 ASAN=On 
+      os: linux
+      addons: &gcc6
+        apt:
+          packages:
+            - gcc-6
+            - valgrind
+          sources:
+            - ubuntu-toolchain-r-test
+
+install:
+    - make
+
+script:
+    # Only enable valgrind for non-ASAN Release builds
+    - if [ "$BUILD_TYPE" == "Release" ] && [ "$ASAN" == "Off" ]; then CTEST_FLAGS="-D ExperimentalMemCheck"; fi
+    - ctest -j2 -VV ${CTEST_FLAGS}
+
+notifications:
+email: false
