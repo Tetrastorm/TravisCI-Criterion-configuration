@@ -1,0 +1,28 @@
+language: c
+sudo: required
+
+branches:
+  only: 
+    - master
+
+matrix:
+  include:
+    # gcc-6 C++11/14/1z Debug/Release
+    - env: GCC_VERSION=6 BUILD_TYPE=Debug C=GNU99 ASAN=On 
+      os: linux
+      addons: &gcc6
+        apt:
+          packages:
+            - gcc-6
+            - valgrind
+          sources:
+            - ubuntu-toolchain-r-test
+
+install:
+    - make
+
+script:
+    - make tests_run
+
+notifications:
+email: false

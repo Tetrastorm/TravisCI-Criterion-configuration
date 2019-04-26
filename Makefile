@@ -12,13 +12,13 @@ CFLAGS		=	-Wall					\
 
 MAIN		=	src/main.c
 
-SRC			=	
+SRC			=	src/test.c
 
 MAINOBJ		=	$(MAIN:.c=.o)
 
 SRCOBJ		=	$(SRC:.c=.o)
 
-TEST		=
+TEST		=	tests/tests_basics.c
 
 TESTOBJ		=	$(TEST:.c=.o)
 
