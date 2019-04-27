@@ -18,6 +18,9 @@ matrix:
           sources:
             - ubuntu-toolchain-r-test
 
+before_install:
+  - ./install_criterion.sh
+
 install:
     - make
 
