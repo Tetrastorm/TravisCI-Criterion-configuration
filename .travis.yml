@@ -20,7 +20,7 @@ matrix:
             - ubuntu-toolchain-r-test
 
 before_install:
-  - ./install_criterion.sh
+  - ./script/install_criterion.sh
 
 install:
     - make
